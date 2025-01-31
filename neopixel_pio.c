@@ -223,18 +223,22 @@ int main() {
   gpio_pull_up(botao_b);
 
 
-bool botao_pressionado = true;
-while (true){
 
-bool  botao_atual = gpio_get(botao_b);
-  if (botao_atual && !botao_pressionado){
-    animacao_tecla_sete();
-    botao_pressionado = true;
-  }else if (!botao_atual) { // Adicionado para detectar quando o botão é solto
-            botao_pressionado = false;
-  }
-  sleep_ms(10);
+bool botao_pressionado = true;
+while (1){
+      while (gpio_get(botao_b)){
+      bool  botao_atual = gpio_get(botao_b);
+        if (botao_atual && !botao_pressionado){
+          animacao_tecla_sete();
+          botao_pressionado = true;
+        }else if (!botao_atual) { // Adicionado para detectar quando o botão é solto
+                  botao_pressionado = false;
+        }
+        sleep_ms(10);
 }
+                  botao_pressionado = false;
+}
+
 
   
 }
